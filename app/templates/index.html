@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block title %}
+<div class="sixteen wide column">
+<div class="one wide row">
+    <div></div>
+        <h1 class="ui center aligned header">Progress Tracker</h1>
+</div>
+<br>
+{% endblock %}
+
+{% block content %}
+<br>
+<div class="ui stackable grid">
+<div class="row">
+    <div class="ui container center aligned">
+        <div class="ui large horizontal divided list">
+            <div class="item">
+                <img class="ui image legendItem" id="arduino"/>
+                <div class="content">
+                    <div class="header">Arduino</div>
+                </div>
+            </div>
+            <div class="item">
+                <img class="ui image legendItem" id="modeling"/>
+                <div class="content">
+                    <div class="header">3D Modeling</div>
+                </div>
+            </div>
+            <div class="item">
+                <img class="ui image legendItem" id="python"/>
+                <div class="content">
+                    <div class="header">Python</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% for team in teams %}
+    <div class="stretched row">
+        <div class="four wide column">
+            <div class="ui segment">
+                <h3>Team: {{ team.name }}</h3>
+                <div class=""><b>Grade:</b> {{ team.grade }}</div>
+                {% if team.member1 %}
+                    <div>{{ team.member1 }}</div>
+                {% endif %}
+                {% if team.member2 %}
+                    <div>{{ team.member2 }}</div>
+                {% endif %}
+                {% if team.member3 %}
+                    <div>{{ team.member3 }}</div>
+                {% endif %}
+                {% if team.member4 %}
+                    <div>{{ team.member4 }}</div>
+                {% endif %}
+                <a class="ui left floated mini button" href="{{ url_for('teams.team_overview', team_id=team.id) }}">Team overview</a>
+                <a class="ui right floated mini button" href="{{ url_for('teams.finish_route', team_id=team.id) }}">Finish a task</a>
+            </div>
+        </div>
+        <div class="eleven wide column">
+            <div class="ui inverted segment">
+                <div class="ui stackable grid">
+                    <div class="one wide row">
+                        {% for task in tasks %}
+                            {% if task.type == "Arduino" and task in team.tasks %}
+                            <div class="progress-background" id="arduino" data-tooltip="{{ task.description }}" style="width:{{ task.value * 15}}px;"></div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="one wide row">
+                        {% for task in tasks %}
+                            {% if task.type == "3D Modeling" and task in team.tasks %}
+                            <div class="progress-background" id="modeling" data-tooltip="{{ task.description }}" style="width:{{ task.value * 15}}px;"></div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="one wide row">
+                        {% for task in tasks %}
+                            {% if task.type == "Python" and task in team.tasks %}
+                            <div class="progress-background" id="python" data-tooltip="{{ task.description }}" style="width:{{ task.value * 15}}px;"></div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+</div>
+{% endblock %}

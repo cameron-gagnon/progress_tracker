@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}
+<div class="sixteen wide column">
+    <div class="one wide row">
+        <div></div>
+        <h1 class="ui center aligned header">Login</h1>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="eight wide centered column">
+    <form action="{{ url_for('login_api.login') }}" method="POST" class="ui form">
+        <b>Username:</b>
+        <input type="text" name="username" value=""><br/>
+        <b>Password:</b>
+        <input type="password" name="password" value=""><br/>
+        <input type="Submit" value="Submit" class="ui button primary">
+    </form>
+</div>
+{% endblock %}

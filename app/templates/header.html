@@ -1,0 +1,31 @@
+<!-- TODO: https://ehkoo.github.io/semantic-ui-examples/navbar/ add mobile friendly display version -->
+<div class="ui container center">
+  <div class="ui menu">
+    <a class="header item" href="{{ url_for('index.home') }}">
+      Home
+    </a>
+    <a class="item" href="{{ url_for('teams.create_route') }}">
+      Create Team
+    </a>
+    <a class="item" href="https://docs.google.com/a/umich.edu/document/d/1ZIlSZt-ki8x_TZQRveCUX4-tcdaqVzdeWjCCwvhx-PI/edit?usp=sharing">
+      View Tasks
+    </a>
+    <a class="item" href="https://docs.google.com/document/d/1hCGMl8SSpjVOpO9wRktmCpaV1iZA2b6LLX9OD8Auvlc/edit?usp=sharing">
+      Syllabus
+    </a>
+    <div class="right menu" >
+        {% if session.get('username') %}
+            <div class="item">
+                {{ session.get('username') }}
+            </div>
+            <a class="item" href="{{ url_for('login_api.logout') }}">
+                Logout
+            </a>
+        {% else %}
+            <a class="item" href="{{ url_for('login_api.login') }}">
+                Login
+            </a>
+        {% endif %}
+    </div>
+  </div>
+</div>

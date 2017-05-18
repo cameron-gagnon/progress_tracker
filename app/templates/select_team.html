@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="sixteen wide column">
+<h1>Select team to update task for </h1>
+<div class="ui stackable grid">
+{% for team in teams %}
+    <div class="four wide column">
+        <a href="{{ url_for('teams.finish_route', team_id=team.id) }}">
+            <div class="ui segment link">
+                <h3>Team: {{ team.name }}</h3>
+                <div>
+                    <b>Grade:</b> {{ team.grade }}
+                </div>
+                {% if team.member1 %}
+                    <div>{{ team.member1 }}</div>
+                {% endif %}
+                {% if team.member2 %}
+                    <div>{{ team.member2 }}</div>
+                {% endif %}
+                {% if team.member3 %}
+                    <div>{{ team.member3 }}</div>
+                {% endif %}
+                {% if team.member4 %}
+                <div>{{ team.member4 }}</div>
+                {% endif %}
+            </div>
+        </a>
+    </div>
+{% endfor %}
+</div>
+</div>
+{% endblock %}

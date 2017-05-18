@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="sixteen wide column">
+    <br>
+    <h1>Updating tasks for: {{ team.name }}</h1>
+    <hr>
+    <br>
+    <div class="ui stackable grid">
+        <h2>Arduino Tasks</h2>
+        <div class="row">
+            {% for task in arduinoTasks %}
+            <div class="four wide column">
+                <form action="{{ url_for('tasks.edit_task', team_id=team.id) }}" method="GET">
+                    {% if task.type == "Arduino" %}
+                        <div class="ui blue segment">
+                    {% elif task.type == "3D Modeling" %}
+                        <div class="ui red segment">
+                    {% elif task.type == "Python" %}
+                        <div class="ui yellow segment">
+                    {% else %}
+                        <div class="ui black segment">
+                    {% endif %}
+                            <h4>{{ task.name }}</h4>
+                            <div><b>Type:</b> {{ task.type }}</div>
+                            <div><b>Value:</b> {{ task.value }}</div>
+                            <div><b>Details:</b> {{ task.description }}</div>
+                            <input type="hidden" value="{{task.id}}" name="task_id">
+                            <input type="Submit" value="Use as template" class="ui primary button">
+                        </div>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+
+        <h2>3D Modeling Tasks</h2>
+        <div class="row">
+            {% for task in modelingTasks %}
+            <div class="four wide column">
+                <form action="{{ url_for('tasks.edit_task', team_id=team.id) }}" method="GET">
+                    {% if task.type == "Arduino" %}
+                        <div class="ui blue segment">
+                    {% elif task.type == "3D Modeling" %}
+                        <div class="ui red segment">
+                    {% elif task.type == "Python" %}
+                        <div class="ui yellow segment">
+                    {% else %}
+                        <div class="ui black segment">
+                    {% endif %}
+                            <h4>{{ task.name }}</h4>
+                            <div><b>Type:</b> {{ task.type }}</div>
+                            <div><b>Value:</b> {{ task.value }}</div>
+                            <div><b>Details:</b> {{ task.description }}</div>
+                            <input type="hidden" value="{{task.id}}" name="task_id">
+                            <input type="Submit" value="Use as template" class="ui primary button">
+                        </div>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+
+        <h2>Python Tasks</h2>
+        <div class="row">
+            {% for task in pythonTasks %}
+            <div class="four wide column">
+                <form action="{{ url_for('tasks.edit_task', team_id=team.id) }}" method="GET">
+                    <div class="ui yellow segment">
+                        <h4>{{ task.name }}</h4>
+                        <div><b>Type:</b> {{ task.type }}</div>
+                        <div><b>Value:</b> {{ task.value }}</div>
+                        <div><b>Details:</b> {{ task.description }}</div>
+                        <input type="hidden" value="{{task.id}}" name="task_id">
+                        <input type="Submit" value="Use as template" class="ui primary button">
+                    </div>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

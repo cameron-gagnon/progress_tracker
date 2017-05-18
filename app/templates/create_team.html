@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="eight wide centered column">
+    <h1>Create Team</h1>
+    <form action="{{ url_for('teams.create_route') }}" method="POST" class="ui form">
+        <h3>Team Name:</h3>
+        <input type="text" name="name">
+        <br>
+        <h3>Grade:</h3>
+        <input type="text" name="grade">
+        <br>
+
+        <h3>Team Members:</h3>
+        <input type="text" name="member1">
+        <br>
+        <input type="text" name="member2">
+        <br>
+        <input type="text" name="member3">
+        <br>
+        <input type="text" name="member4" class="bottom padded">
+        <br>
+
+        <div class="ui container center aligned">
+            <input type="submit" value="Create Team!" class="ui large button primary">
+        </div>
+    </form>
+</div>
+{% endblock %}

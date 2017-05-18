@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block title %}
+<div class="sixteen wide column">
+<div class="one wide row">
+    <div></div>
+        <h1 class="ui center aligned header">{{ team.name }} Overview</h1>
+    <div></div>
+</div>
+{% endblock %}
+
+
+{% block content %}
+<br>
+<div class="one wide row">
+    <div class="ui container center aligned">
+        <h2>Arduino Tasks</h2>
+    </div>
+</div>
+<div class="ui grid">
+    <div class="twelve wide centered column">
+        <div class="ui four column celled grid">
+            <div class="row">
+                <div class="column"><b>Task Name</b></div>
+                <div class="column"><b>Description</b></div>
+                <div class="column"><b>Value</b></div>
+                <div class="column"><b>Completed</b></div>
+            </div>
+            {% for task in arduinoTasks %}
+                {% if task in team.tasks %}
+                <div class="row">
+                    <div class="column"> {{ task.name }} </div>
+                    <div class="column"> {{ task.description }} </div>
+                    <div class="column"> {{ task.value }} </div>
+                    <div class="column">Done!</div>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+
+<br>
+<br>
+<div class="one wide row">
+    <div class="ui container center aligned">
+        <h2>3D Modeling Tasks</h2>
+    </div>
+</div>
+<div class="ui grid">
+<div class="twelve wide centered column">
+    <div class="ui four column celled grid">
+        <div class="row">
+            <div class="column"><b>Task Name</b></div>
+            <div class="column"><b>Description</b></div>
+            <div class="column"><b>Value</b></div>
+            <div class="column"><b>Completed</b></div>
+        </div>
+        {% for task in modelingTasks %}
+            {% if task in team.tasks %}
+            <div class="row">
+                <div class="column"> {{ task.name }} </div>
+                <div class="column"> {{ task.description }} </div>
+                <div class="column"> {{ task.value }} </div>
+                <div class="column">Done!</div>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+</div>
+</div>
+
+<br>
+<br>
+<div class="one wide row">
+    <div class="ui container center aligned">
+        <h2>Python Tasks</h2>
+    </div>
+</div>
+<div class="ui grid">
+<div class="twelve wide centered column">
+    <div class="ui four column celled grid">
+        <div class="row">
+            <div class="column"><b>Task Name</b></div>
+            <div class="column"><b>Description</b></div>
+            <div class="column"><b>Value</b></div>
+            <div class="column"><b>Completed</b></div>
+        </div>
+        {% for task in pythonTasks %}
+            {% if task in team.tasks %}
+                <div class="row">
+                    <div class="column"> {{ task.name }} </div>
+                    <div class="column"> {{ task.description }} </div>
+                    <div class="column"> {{ task.value }} </div>
+                    <div class="column">Done!</div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+</div>
+</div>
+
+{% endblock %}
