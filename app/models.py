@@ -5,6 +5,7 @@ class Team(db.Model):
     name = db.Column(db.String(80))
     tasks = db.relationship('Task')
     grade = db.Column(db.String(5))
+    color = db.Column(db.String(20))
     member1 = db.Column(db.Text)
     member2 = db.Column(db.Text)
     member3 = db.Column(db.Text)

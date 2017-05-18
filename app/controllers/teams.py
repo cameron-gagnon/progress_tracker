@@ -14,6 +14,7 @@ def create_route():
     else:
         team = models.Team(name=request.form['name'],
                            grade=request.form['grade'],
+                           color=request.form['color'],
                            member1=request.form['member1'],
                            member2=request.form['member2'],
                            member3=request.form['member3'],
