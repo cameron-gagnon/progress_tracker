@@ -31,6 +31,8 @@ def create_route():
 
 @teams.route('/teams/edit/<int:team_id>', methods=['GET', 'POST'])
 def edit_team_info(team_id):
+    if not session.get('username'):
+        return redirect(url_for('login_api.login'))
 
     team = models.Team.query.get(team_id)
     team.member1 = '' if not team.member1 else team.member1
@@ -51,8 +53,6 @@ def edit_team_info(team_id):
         return render_template('edit_team_info.html', **options)
 
     else:
-        if not session.get('username'):
-            return redirect(url_for('login_api.login'))
 
         team.name = request.form['name']
         team.member1 = request.form['member1']
