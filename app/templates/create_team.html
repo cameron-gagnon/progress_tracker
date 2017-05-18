@@ -7,7 +7,11 @@
         <input type="text" name="name">
         <br>
         <h3>Grade:</h3>
-        <input type="text" name="grade">
+        <select name="grade">
+            {% for grade in grades %}
+                <option value="{{ grade }}">{{ grade }}</option>
+            {% endfor %}
+        </select>
         <br>
 
         <h3>Team Members:</h3>
@@ -21,19 +25,12 @@
         <br>
 
         <h3>Pick your team color:</h3>
-        <input type="radio" name="color" id="red" value="red"> <label for="red" class="ui red button">Red</label>
-        <input type="radio" name="color" id="orange" value="orange"> <label for="orange" class="ui orange button">Orange</label>
-        <input type="radio" name="color" id="yellow" value="yellow"> <label for="yellow" class="ui yellow button">Yellow</label>
-        <input type="radio" name="color" id="olive" value="olive"> <label for="olive" class="ui olive button">Olive</label>
-        <input type="radio" name="color" id="green" value="green"> <label for="green" class="ui green button">Green</label><br>
-        <input type="radio" name="color" id="teal" value="teal"> <label for="teal" class="ui teal button">Teal</label>
-        <input type="radio" name="color" id="blue" value="blue"> <label for="blue" class="ui blue button">Blue</label>
-        <input type="radio" name="color" id="violet" value="violet"> <label for="violet" class="ui violet button">Violet</label>
-        <input type="radio" name="color" id="purple" value="purple"> <label for="purple" class="ui purple button">Purple</label>
-        <input type="radio" name="color" id="pink" value="pink"> <label for="pink" class="ui pink button">Pink</label><br>
-        <input type="radio" name="color" id="brown" value="brown"> <label for="brown" class="ui brown button">Brown</label>
-        <input type="radio" name="color" id="grey" value="grey"> <label for="grey" class="ui grey button">Grey</label>
-        <input type="radio" name="color" id="black" value="black"> <label for="black" class="ui black button">Black</label>
+        {% for color in colors %}
+            <input type="radio" name="color" id="{{ color }}" value="{{ color }}"> <label for="{{ color }}" class="ui {{ color }} button">{{ color.title() }}</label>
+            {% if loop.index % 5 == 0 %}
+                <br>
+            {% endif %}
+        {% endfor %}
         <br>
         <br>
         <br>

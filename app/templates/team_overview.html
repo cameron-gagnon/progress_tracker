@@ -4,8 +4,10 @@
 <div class="sixteen wide column">
 <div class="one wide row">
     <div></div>
-        <h1 class="ui center aligned header">{{ team.name }} Overview</h1>
-    <div></div>
+    <h1 class="ui center aligned header">{{ team.name }} Overview</h1>
+</div>
+<div class="one wide row">
+    <a href="{{ url_for('teams.edit_team_info', team_id=team.id) }}" class="ui button"> Edit Team Info</a>
 </div>
 {% endblock %}
 

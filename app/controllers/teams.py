@@ -1,5 +1,5 @@
 from flask import *
-from app import models, db
+from app import models, db, helpers
 
 teams = Blueprint('teams', __name__, template_folder='templates')
 
@@ -10,7 +10,12 @@ def create_route():
         Create a team
     """
     if request.method == 'GET':
-        return render_template('create_team.html')
+        options = {
+            'colors': helpers.colors,
+            'grades': helpers.grades,
+        }
+        return render_template('create_team.html', **options)
+
     else:
         team = models.Team(name=request.form['name'],
                            grade=request.form['grade'],
@@ -23,6 +28,44 @@ def create_route():
         db.session.commit()
         print(team)
         return redirect(url_for('index.home'))
+
+@teams.route('/teams/edit/<int:team_id>', methods=['GET', 'POST'])
+def edit_team_info(team_id):
+
+    team = models.Team.query.get(team_id)
+    team.member1 = '' if not team.member1 else team.member1
+    team.member2 = '' if not team.member2 else team.member2
+    team.member3 = '' if not team.member3 else team.member3
+    team.member4 = '' if not team.member4 else team.member4
+
+    if request.method == 'GET':
+
+        options = {
+            'team': team,
+            'colors': helpers.colors,
+            'grades': helpers.grades,
+            'selectedColor': team.color,
+            'selectedGrade': team.grade,
+        }
+
+        return render_template('edit_team_info.html', **options)
+
+    else:
+        if not session.get('username'):
+            return redirect(url_for('login_api.login'))
+
+        team.name = request.form['name']
+        team.member1 = request.form['member1']
+        team.member2 = request.form['member2']
+        team.member3 = request.form['member3']
+        team.member4 = request.form['member4']
+        team.grade = request.form['grade']
+        team.color = request.form['color']
+
+        db.session.add(team)
+        db.session.commit()
+        return redirect(url_for('index.home'))
+
 
 @teams.route('/teams/finish', methods=['GET'])
 def select_finish_route():
