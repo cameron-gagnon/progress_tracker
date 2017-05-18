@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="eight wide centered column">
+    <h1>Create Team</h1>
+    <form action="{{ url_for('teams.edit_team_info', team_id=team.id) }}" method="POST" class="ui form">
+        <h3>Team Name:</h3>
+        <input type="text" name="name" value="{{ team.name }}">
+        <br>
+        <h3>Grade:</h3>
+        <select name="grade">
+            {% for grade in grades %}
+            {% if grade == selectedGrade %}
+                <option selected value="{{ grade }}">{{ grade }}</option>
+            {% else %}
+                <option value="{{ grade }}">{{ grade }}</option>
+            {% endif %}
+            {% endfor %}
+        </select>
+        <br>
+
+        <h3>Team Members:</h3>
+        <input type="text" name="member1" value="{{ team.member1 }}">
+        <br>
+        <input type="text" name="member2" value="{{ team.member2 }}">
+        <br>
+        <input type="text" name="member3" value="{{ team.member3 }}">
+        <br>
+        <input type="text" name="member4" value="{{ team.member4 }}" class="bottom padded">
+        <br>
+
+        <h3>Pick your team color:</h3>
+        {% for color in colors %}
+            {% if color == selectedColor %}
+                <input checked type="radio" name="color" id="{{ color }}" value="{{ color }}"> <label for="{{ color }}" class="ui {{ color }} button">{{ color.title() }}</label>
+            {% else %}
+                <input type="radio" name="color" id="{{ color }}" value="{{ color }}"> <label for="{{ color }}" class="ui {{ color }} button">{{ color.title() }}</label>
+            {% endif %}
+            {% if loop.index % 5 == 0 %}
+                <br>
+            {% endif %}
+        {% endfor %}
+        <br>
+        <br>
+        <br>
+
+
+        <div class="ui container center aligned">
+            <input type="submit" value="Update Team!" class="ui large button primary">
+        </div>
+    </form>
+</div>
+{% endblock %}
