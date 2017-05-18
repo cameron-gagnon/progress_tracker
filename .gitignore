@@ -1,0 +1,4 @@
+*.pyc
+app.sqlite
+venv
+db_repository
