@@ -118,15 +118,19 @@ def finish_route(team_id):
 @teams.route('/teams/overview/<int:team_id>', methods=['GET'])
 def team_overview(team_id):
     team = models.Team.query.get(team_id)
+
     arduinoTasks = models.Task.query.filter(models.Task.type == 'Arduino').filter(models.Task.resolved == True).all()
     modelingTasks = models.Task.query.filter(models.Task.type == '3D Modeling').filter(models.Task.resolved == True).all()
     pythonTasks = models.Task.query.filter(models.Task.type == 'Python').filter(models.Task.resolved == True).all()
 
+    TechInfo = namedtuple('TechInfo', ['type', 'tasks', 'color'])
+    techTuples = [TechInfo("Arduino", arduinoTasks, "blue"),
+                  TechInfo("3D Modeling", modelingTasks, "red"),
+                  TechInfo("Python", pythonTasks, "yellow")]
+
     options = {
+        'techTuples': techTuples,
         'team': team,
-        'arduinoTasks': arduinoTasks,
-        'modelingTasks': modelingTasks,
-        'pythonTasks': pythonTasks,
     }
 
     return render_template('team_overview.html', **options)

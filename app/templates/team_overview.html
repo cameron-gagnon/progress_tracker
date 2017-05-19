@@ -17,95 +17,46 @@
     </div>
 {% endif %}
 
-<div class="one wide row">
-    <div class="ui container center aligned">
-        <h2>Arduino Tasks</h2>
+{% for tech in techTuples %}
+    <div class="one wide row">
+        <div class="ui container center aligned">
+            <h2 class="ui {{ tech.color }} header">{{ tech.type }} Tasks</h2>
+        </div>
     </div>
-</div>
-<div class="ui grid">
-    <div class="twelve wide centered column">
-        <div class="ui four column celled grid">
-            <div class="row">
-                <div class="column"><b>Task Name</b></div>
-                <div class="column"><b>Description</b></div>
-                <div class="column"><b>Value</b></div>
-                <div class="column"><b>Completed</b></div>
-            </div>
-            {% for task in arduinoTasks %}
-                {% if task in team.tasks %}
+    <div class="ui grid">
+        <div class="twelve wide centered column">
+            <div class="ui five column celled grid">
                 <div class="row">
-                    <div class="column"> {{ task.name }} </div>
-                    <div class="column"> {{ task.description }} </div>
-                    <div class="column"> {{ task.value }} </div>
-                    <div class="column">Done!</div>
-                </div>
+                {% if session.get('username') %}
+                    <div class="column"></div>
                 {% endif %}
-            {% endfor %}
-        </div>
-
-    </div>
-</div>
-
-<br>
-<br>
-<div class="one wide row">
-    <div class="ui container center aligned">
-        <h2>3D Modeling Tasks</h2>
-    </div>
-</div>
-<div class="ui grid">
-<div class="twelve wide centered column">
-    <div class="ui four column celled grid">
-        <div class="row">
-            <div class="column"><b>Task Name</b></div>
-            <div class="column"><b>Description</b></div>
-            <div class="column"><b>Value</b></div>
-            <div class="column"><b>Completed</b></div>
-        </div>
-        {% for task in modelingTasks %}
-            {% if task in team.tasks %}
-            <div class="row">
-                <div class="column"> {{ task.name }} </div>
-                <div class="column"> {{ task.description }} </div>
-                <div class="column"> {{ task.value }} </div>
-                <div class="column">Done!</div>
-            </div>
-            {% endif %}
-        {% endfor %}
-    </div>
-
-</div>
-</div>
-
-<br>
-<br>
-<div class="one wide row">
-    <div class="ui container center aligned">
-        <h2>Python Tasks</h2>
-    </div>
-</div>
-<div class="ui grid">
-<div class="twelve wide centered column">
-    <div class="ui four column celled grid">
-        <div class="row">
-            <div class="column"><b>Task Name</b></div>
-            <div class="column"><b>Description</b></div>
-            <div class="column"><b>Value</b></div>
-            <div class="column"><b>Completed</b></div>
-        </div>
-        {% for task in pythonTasks %}
-            {% if task in team.tasks %}
-                <div class="row">
-                    <div class="column"> {{ task.name }} </div>
-                    <div class="column"> {{ task.description }} </div>
-                    <div class="column"> {{ task.value }} </div>
-                    <div class="column">Done!</div>
+                    <div class="column"><b>Task Name</b></div>
+                    <div class="column"><b>Description</b></div>
+                    <div class="column"><b>Value</b></div>
+                    <div class="column"><b>Completed</b></div>
                 </div>
-            {% endif %}
-        {% endfor %}
+                {% for task in tech.tasks %}
+                    {% if task in team.tasks %}
+                    <div class="row">
+                    {% if session.get('username') %}
+                        <div class="column">
+                            <a class="ui negative button" href="{{ url_for('tasks.task_delete', task_id=task.id) }}">Delete</a>
+                        </div>
+                    {% endif %}
+                        <div class="column"> {{ task.name }} </div>
+                        <div class="column"> {{ task.description }} </div>
+                        <div class="column"> {{ task.value }} </div>
+                        <div class="column">Done!</div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+        </div>
     </div>
 
-</div>
-</div>
+    <br>
+    <br>
+{% endfor %}
 
 {% endblock %}
