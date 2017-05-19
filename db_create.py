@@ -27,7 +27,7 @@ db.session.add(user2)
 # create admin Team
 adminTeam = models.Team(name='Los G\'s',
                         grade=16,
-                        color='blue',
+                        color='red',
                         member1='Cameron Gagnon',
                         member2='Lawrence Teng')
 db.session.add(adminTeam)
