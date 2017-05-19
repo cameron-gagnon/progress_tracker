@@ -84,7 +84,6 @@ def tasks_pending():
         teamTasks = defaultdict(list)
 
         for task in pendingTasks:
-            print(task)
             team = models.Team.query.get(task.team_id)
             teamTasks[team].append(task)
 

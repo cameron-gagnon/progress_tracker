@@ -27,7 +27,6 @@ def create_route():
                            member4=request.form['member4'])
         db.session.add(team)
         db.session.commit()
-        print(team)
         return redirect(url_for('index.home'))
 
 @teams.route('/teams/edit/<int:team_id>', methods=['GET', 'POST'])
@@ -129,6 +128,5 @@ def team_overview(team_id):
         'modelingTasks': modelingTasks,
         'pythonTasks': pythonTasks,
     }
-    print(options)
 
     return render_template('team_overview.html', **options)
