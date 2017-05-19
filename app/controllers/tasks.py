@@ -24,9 +24,6 @@ def submit_task(team_id):
         return render_template('submit_task.html', **options)
 
     else:
-        if not session.get('username'):
-            return redirect(url_for('login_api.login'))
-
         new_task = models.Task(name=request.form['name'],
                                type=request.form['type'],
                                description=request.form['description'],
