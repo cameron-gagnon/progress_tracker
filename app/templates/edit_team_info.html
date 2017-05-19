@@ -46,6 +46,7 @@
 
         <div class="ui container center aligned">
             <input type="submit" value="Update Team!" class="ui large button primary">
+            <a class="ui large negative button" href="{{ url_for('teams.delete_team', team_id=team.id) }}">Delete Team</a>
         </div>
     </form>
 </div>

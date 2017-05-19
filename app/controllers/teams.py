@@ -67,6 +67,16 @@ def edit_team_info(team_id):
         db.session.commit()
         return redirect(url_for('index.home'))
 
+@teams.route('/teams/delete/<int:team_id>', methods=['GET'])
+def delete_team(team_id):
+    if not session.get('username'):
+        return redirect(url_for('index.home'))
+
+    models.Team.query.filter(models.Team.id == team_id).delete()
+    db.session.commit()
+
+    return redirect(url_for('index.home'))
+
 
 @teams.route('/teams/finish', methods=['GET'])
 def select_finish_route():
