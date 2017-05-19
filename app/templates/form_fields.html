@@ -1,0 +1,24 @@
+<h1>Submitting task for: {{ team.name }}</h1>
+<h3>Task Name:</h3>
+<input type="text" name="name" value="{{ task.name }}">
+
+<h3>Type:</label></h3>
+
+<input {{ arduinoChecked }} type="radio" name="type" value="Arduino"> Arduino<br>
+<input {{ pythonChecked }} type="radio" name="type" value="Python"> Python<br>
+<input {{ modelChecked }} type="radio" name="type" value="3D Modeling"> 3D Modeling<br>
+
+<h3>Value:</h3>
+<select name="value">
+    {% for i in range(1, 11) %}
+        {% if i == task.value %}
+            <option selected value="{{ i }}">{{ i }}</option>
+        {% else %}
+            <option value="{{ i }}">{{ i }}</option>
+        {% endif %}
+    {% endfor %}
+</select>
+
+<h3>Description:</h3>
+<input type="text" name="description" value="{{ task.description }}">
+<br>

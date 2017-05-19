@@ -7,7 +7,7 @@ index = Blueprint('index', __name__, template_folder='templates')
 @index.route('/')
 def home():
     teams = models.Team.query.all()
-    tasks = models.Task.query.all()
+    tasks = models.Task.query.filter(models.Task.resolved == True).all()
     options = {
         'teams': teams,
         'tasks': tasks,

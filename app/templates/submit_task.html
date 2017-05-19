@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="eight wide centered column">
+<form action="{{ url_for('tasks.submit_task', team_id=team.id) }}" method="POST" class="ui form">
+
+    {% include "form_fields.html" %}
+
+    <div class="ui container center aligned">
+        <input type="submit" value="Submit for Approval!" class="ui large primary button">
+    </div>
+</form>
+</div>
+{% endblock %}

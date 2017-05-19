@@ -15,6 +15,9 @@
     </a>
     <div class="right menu" >
         {% if session.get('username') %}
+            <a class="item" href="{{ url_for('tasks.tasks_pending') }}">
+                Pending Tasks
+            </a>
             <div class="item">
                 {{ session.get('username') }}
             </div>

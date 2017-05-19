@@ -6,16 +6,17 @@
     <div></div>
     <h1 class="ui center aligned header">{{ team.name }} Overview</h1>
 </div>
-{% if session.get('username') %}
-    <div class="one wide row">
-        <a href="{{ url_for('teams.edit_team_info', team_id=team.id) }}" class="ui button"> Edit Team Info</a>
-    </div>
-{% endif %}
 {% endblock %}
 
 
 {% block content %}
 <br>
+{% if session.get('username') %}
+    <div class="one wide row">
+        <a href="{{ url_for('teams.edit_team_info', team_id=team.id) }}" class="ui button"> Edit Team Info</a>
+    </div>
+{% endif %}
+
 <div class="one wide row">
     <div class="ui container center aligned">
         <h2>Arduino Tasks</h2>

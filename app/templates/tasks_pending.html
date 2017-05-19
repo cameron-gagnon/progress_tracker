@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}
+
+
+{% endblock %}
+
+
+{% block content %}
+<div class="sixteen wide column">
+    <br>
+    <h1>Pending Tasks</h1>
+    <hr>
+    <br>
+
+    <div class="ui stackable grid">
+    {% for team, tasks in pendingTeamTasks.items() %}
+        <h2>{{ team.name }}</h2>
+        <div class="row">
+            {% for task in tasks %}
+                <div class="four wide column">
+                    <form action="{{ url_for('tasks.tasks_pending') }}" method="POST">
+                        <div class="ui {{ colorMap[task.type] }} segment">
+                            <h4>{{ task.name }}</h4>
+                            <div><b>Type:</b> {{ task.type }}</div>
+                            <div><b>Value:</b> {{ task.value }}</div>
+                            <div><b>Details:</b> {{ task.description }}</div>
+                            <input type="hidden" value="{{task.id}}" name="task_id">
+                            <div class="ui grid">
+                                <div class="row">
+                                    <div class="ui container center aligned">
+                                        <div class="ui small buttons">
+                                            <input type="Submit" value="Approve"
+                                            class="ui primary button">
+                                            <a class="ui button" href="{{ url_for('tasks.task_edit', task_id=task.id) }}?task_id={{ task.id }}">Edit</a>
+                                            <a class="ui negative button" href="{{ url_for('tasks.task_delete', task_id=task.id) }}"=>Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
+
+    {% endfor %}
+    </div>
+
+</div>
+{% endblock %}
