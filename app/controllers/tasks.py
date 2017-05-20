@@ -1,7 +1,7 @@
 from flask import *
 
 from app import models, db, helpers
-from collections import defaultdict, namedtuple
+from collections import namedtuple
 
 tasks = Blueprint('tasks', __name__, template_folder='templates')
 
@@ -29,6 +29,9 @@ def submit_task(team_id):
                                description=request.form['description'],
                                value=request.form['value'],
                                team_id=team_id)
+        team = models.Team.query.get(team_id)
+        team.tasks.append(new_task)
+
         db.session.add(new_task)
         db.session.commit()
 
@@ -76,16 +79,19 @@ def tasks_pending():
 
     if request.method == 'GET':
         # TODO: order by oldest to newest
-        pendingTasks = models.Task.query.filter(models.Task.resolved == False).all()
-        TeamTaskPairs = namedtuple('TeamTaskPairs', ['team', 'tasks'])
-        teamTasks = defaultdict(list)
+        teams = models.Team.query.all()
 
-        for task in pendingTasks:
-            team = models.Team.query.get(task.team_id)
-            teamTasks[team].append(task)
+        teamsWithPendingTasks = []
+        for team in teams:
+            for task in team.tasks:
+                if not task.resolved:
+                    teamsWithPendingTasks.append(team)
+                    # don't re-add this team if they have more than one
+                    # outstanding request
+                    break
 
         options = {
-            'pendingTeamTasks': teamTasks,
+            'teamsWithPendingTasks': teamsWithPendingTasks,
             'colorMap': helpers.colorMap,
         }
 
